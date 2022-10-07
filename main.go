@@ -11,7 +11,7 @@ import (
 
 func makeNewRelicApplication() (*newrelic.Application, error) {
 	app, err := newrelic.NewApplication(
-		newrelic.ConfigAppName("newrelic-zap-logs-in-context"),
+		newrelic.ConfigAppName("code-level-metrics-example"),
 		newrelic.ConfigLicense(os.Getenv("NEW_RELIC_LICENSE_KEY")),
 		newrelic.ConfigAppLogEnabled(false),
 		newrelic.ConfigCodeLevelMetricsEnabled(true),
@@ -46,5 +46,5 @@ func main() {
 
 	r.HandleFunc(newrelic.WrapHandleFunc(app, "/example", exampleHandler))
 
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":8000", r)
 }
