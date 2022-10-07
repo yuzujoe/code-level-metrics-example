@@ -29,6 +29,7 @@ func makeNewRelicApplication() (*newrelic.Application, error) {
 
 func exampleHandler(w http.ResponseWriter, r *http.Request) {
 	txn := newrelic.FromContext(r.Context())
+	txn.SetOption(newrelic.WithThisCodeLocation())
 	defer txn.StartSegment("ExampleHandler").End()
 
 	w.WriteHeader(http.StatusOK)
